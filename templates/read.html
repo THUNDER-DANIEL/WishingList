@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>DASHBOARD</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    table, th, td {
+  border: 1px solid black;
+}
+    h1, h3{
+      display: inline-block;
+    }
+    .image{
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+    }
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    table, th, td {
+        border: 1px solid black;
+      }
+  </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#"></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <!-- {% for display in show %}
+        <li  class="active"><a href="#">{{display['first_name']}}</a></li>
+        {%endfor%} -->
+        <li  class="active"><a href="#">HELLO,</a></li>
+        {%for header in show %}
+        <li  class="active"><a href="#">{{header['name']}} !</a></li>
+        {%endfor%}
+
+      </ul>
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="/wish_items/create">ADD ITEM</a></li>
+        <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log-out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+</div>
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-11 text-left"> 
+  
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <h4>{{message}}</h4> 
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+
+        <h3>Your Wish List:</h3>
+      <table style="width:50%">
+          <tr>
+            <th>Item</th>
+            <th>Added by</th> 
+            <th>Date Added</th>
+            <th>Action</th>
+          </tr>
+          {%for x in hero%}
+          <tr>
+            <td><a href="/wish_items/{{x['idnum']}}">{{x["wishing"]}}</a></td>
+            <td>{{x["name"]}}</td>
+            <td>{{x["wcreated_at"]}}</td>
+            <td><a href="/delete/{{x['idnum']}}">REMOVE</a></td>
+          </tr>
+          {%endfor%}
+        </table>
+
+
+        <BR><BR><BR><BR><BR><BR> <center>
+          <h3>Other User's Wish List:</h3>
+         
+          <table style="width:50%">
+            <tr>
+              <th>Item</th>
+              <th>Added by</th> 
+              <th>Date Added</th>
+            </tr>
+            {%for z in appearing %}
+            <tr>
+              <td><a href="/wish_items/{{z['idnum']}}">{{z['wishing']}}</a></td>
+              <td>{{z['name']}}</td>
+              <td>{{z['wcreated_at']}}</td>
+
+            </tr>
+            {%endfor%}
+
+          </table>
+        </center>
+    </div>
+
+
+
+</body>
+</html>
